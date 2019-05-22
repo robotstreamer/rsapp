@@ -13,7 +13,7 @@ Electron app for desktop streaming on [robotstreamer.com](http://robotstreamer.c
 - OBS-Studio:
   - open `Settings > Stream `
     - set to `Custom server`
-      - server: `http://localhost/live`
+      - server: `rtmp://localhost/live`
       - key: `cam`
   - Hit: `start streaming` button in OBS
 
