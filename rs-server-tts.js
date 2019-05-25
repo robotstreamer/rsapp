@@ -40,7 +40,7 @@ tts.speak = function(phrase) {
 tts.now = function(phrase, callback) {
   phrase = String(phrase.replace('"',' '))
   if (store.get('config.rs.tts_voice') === 'espeak') {
-    let espeakCommand = isWin ? 'espeak.exe' : 'espeak'
+    let espeakCommand = isWin ? 'espeak' : 'espeak'
     exec.quiet(espeakCommand + ' -s ' + parseInt(store.get('config.rs.tts_speed')*100)+' '+store.get('config.rs.tts_extra')+' "'+phrase+'"', function(err,res){
       if (callback) callback()
     });
