@@ -90,10 +90,12 @@ function openChatHostWebsocket() {
 	});
 
 	wsChat.on('message', function incoming(data) {
-		console.log('==> chat rx: '.yellow)
-		console.log(JSON.parse(data));
+		// console.log('==> chat rx: '.yellow)
+		// console.log(JSON.parse(data));
 		var msg = JSON.parse(data)
         if (msg && msg.robot_id && msg.robot_id === store.get('config.rs.robotID') && msg.tts) {
+            console.log('==> chat rx: '.yellow)
+            console.log(JSON.parse(data));
             tts.speak(msg.message)
         }
 	});
