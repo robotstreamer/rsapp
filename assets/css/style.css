@@ -63,15 +63,17 @@ select {
     background: rgba(0,0,0,0.3);
     border: none;
     border-color: #232323;
-    border-bottom: 1px solid #232323;
+    /* border-bottom: 1px solid #232323; */
     border-radius: 0px;
     color: white;
+    padding: 0px;
     -webkit-border-radius:0px;
 }
 
 select:focus {
     height: 21px;
     background: #0DA171;
+    background: #232323;
     border: 1px solid #000;
     outline-color: black;
     outline-width: 1px:
@@ -102,9 +104,12 @@ button {
     /* border: 1px solid red; */
     padding: 3px 5px 3px 5px;
     margin: 0px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.3);
     border: none;
-    /* border-bottom: 1px solid #232323; */
+    border-bottom: 1px solid #232323;
+    border-right: 1px solid #232323;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
     color: white;
 }
 button:focus {
