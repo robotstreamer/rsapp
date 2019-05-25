@@ -96,7 +96,7 @@ function openChatHostWebsocket() {
         if (msg && msg.robot_id && msg.robot_id === store.get('config.rs.robotID') && msg.tts) {
             console.log('==> chat rx: '.yellow)
             console.log(JSON.parse(data));
-            tts.speak(msg.message)
+            tts.speak(msg.message.substr(0,75))
         }
 	});
 
