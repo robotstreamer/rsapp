@@ -3,7 +3,8 @@ Electron app for desktop streaming on [robotstreamer.com](http://robotstreamer.c
 
 ## How to use
 #### You will need
-- OBS-Studio  https://obsproject.com/ 
+- OBS-Studio  https://obsproject.com/   
+- espeak (see instructions below)
 
 #### Setup
 - RS-App
@@ -19,7 +20,8 @@ Electron app for desktop streaming on [robotstreamer.com](http://robotstreamer.c
 
 ---
 
-### espeak (MacOS/OSX)
+## espeak installation
+### MacOS/OSX:
 If you want to use espeak on a mac you will have to install it first.
 The simplest way is to use [homebrew](https://brew.sh).
 
@@ -40,6 +42,12 @@ You need to open a Terminal window (hit CMD-Space and type: terminal) and paste 
 
 5. Close the terminal or type:  
 `exit`
+
+### Linux/Debian
+`sudo apt-get install espeak`
+
+### Windows
+espeak is already included in this application.
 
 --- 
 
