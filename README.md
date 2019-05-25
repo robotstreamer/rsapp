@@ -17,6 +17,32 @@ Electron app for desktop streaming on [robotstreamer.com](http://robotstreamer.c
       - key: `cam`
   - Hit: `start streaming` button in OBS
 
+---
+
+### espeak (MacOS/OSX)
+If you want to use espeak on a mac you will have to install it first.
+The simplest way is to use [homebrew](https://brew.sh).
+
+You need to open a Terminal window (hit CMD-Space and type: terminal) and paste the following commands: 
+
+1. Install homebrew:  
+`/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`  
+*Note: If it asks for a password, use the one you use to log into your computer (it will not show any characters)*
+  
+2. Update homebrew:  
+`brew update`
+  
+3. Finally, install espeak:  
+`brew install espeak`
+  
+4. Test if it works:  
+`espeak "hello world"`
+
+5. Close the terminal or type:  
+`exit`
+
+--- 
+
 # Development
 You will need NodeJS v8.0+
 
