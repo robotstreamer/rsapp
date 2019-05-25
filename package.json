@@ -1,6 +1,6 @@
 {
   "name": "rsapp",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "",
   "main": "main.js",
   "dependencies": {
@@ -9,6 +9,7 @@
     "electron": "^3.1.8",
     "electron-context-menu": "^0.10.1",
     "electron-store": "^2.0.0",
+    "executive": "^1.6.3",
     "ffmpeg-static": "^2.4.0",
     "fs": "0.0.1-security",
     "node-media-server": "2.0.3",
@@ -18,7 +19,12 @@
     "tree-kill": "^1.2.1"
   },
   "devDependencies": {
-    "electron-packager": "^9.1.0"
+    "electron-packager": "^9.1.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify-es": "^1.0.4"
   },
   "scripts": {
     "start": "MALLOC_CHECK_=0 electron .",
