@@ -11,7 +11,7 @@ $(document).ready(function() {
         setTimeout(function(){
             e.currentTarget.disabled = false
         },2000)
-        
+
     })
     ipcRenderer.on('switch:tts', function(event, message) {
         store.set('config.rs.tts_enabled', message)
@@ -29,6 +29,13 @@ $(document).ready(function() {
         }
     })
 
+    $('input[name=input-tts-extra]')[0].value = store.get('config.rs.tts_extra') || ""
+    $('input[name=input-tts-extra]').on('change keyup copy paste cut', function(e) {
+        console.log(e.currentTarget.value)
+        let extra = e.currentTarget.value
+        ipcRenderer.send('input:tts:extra', extra)
+    })
+
     $('select[name=select-tts-speed]')[0].value = store.get('config.rs.tts_speed') || ""
     $('select[name=select-tts-speed]').change(function(e) {
         console.log(e.currentTarget.value)
@@ -38,12 +45,15 @@ $(document).ready(function() {
         }
     })
 
-    $('input[name=input-tts-pausetime]')[0].value = store.get('config.rs.tts_pausetime') || 1
+    $('button[name=button-tts-test]').click(function(e) {
+        ipcRenderer.send('button:tts:test')
+        document.activeElement.blur()
+    })
+
+    $('input[name=input-tts-pausetime]')[0].value = store.get('config.rs.tts_pausetime') || 0
     $('input[name=input-tts-pausetime]').change(function(e) {
         let value = Number(e.currentTarget.value)
-        if (value) {
-            ipcRenderer.send('input:tts:pausetime', value)
-        }
+        ipcRenderer.send('input:tts:pausetime', value)
     })
 
     $('input[name=input-tts-queuemax]')[0].value = store.get('config.rs.tts_queuemax') || 20
@@ -58,7 +68,7 @@ $(document).ready(function() {
         ipcRenderer.send('button:tts:queueclear')
         document.activeElement.blur()
     })
-    
+
     ipcRenderer.on('status:tts:messages', function(event, message) {
         $('input[name=input-tts-queuestatus]')[0].value = message || 0
     });

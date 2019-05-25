@@ -82,7 +82,9 @@
                     <div class="col s4">
                         <div class="input-field col s11 right-align">
                             <select class="browser-default" name="select-tts-voice">
-                                <option value="" disabled selected>Select Voice</option>
+                                <option value="" disabled>Default:</option>
+                                <option value="espeak">espeak</option>
+                                <option value="" disabled>Apple only:</option>
                                 <option value="Alex">Alex</option>
                                 <option value="Daniel">Daniel</option>
                                 <option value="Fred">Fred</option>
@@ -93,6 +95,19 @@
                                 <option value="Veena">Veena</option>
                                 <option value="Victoria">Victoria</option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-panel card-panel-settings settings-tts">
+                <div class="row">
+                    <div class="col s8">
+                        <!-- <i class="material-icons">favorite</i> -->
+                        <span class="card-panel-title">TTS Extra (espeak)</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="col s11 right-align">
+                            <input type="text" class="browser-default" name="input-tts-extra">
                         </div>
                     </div>
                 </div>
@@ -135,7 +150,7 @@
                     </div>
                     <div class="col s4">
                         <div class="col s11 right-align">
-                            <input type="number" class="browser-default" name="input-tts-pausetime" min="1" max="5">
+                            <input type="number" class="browser-default" name="input-tts-pausetime" min="0" max="5">
                         </div>
                     </div>
                 </div>
@@ -148,7 +163,7 @@
                     </div>
                     <div class="col s4">
                         <div class="col s11 right-align">
-                            <input type="number" class="browser-default" name="input-tts-queuemax" min="0" max="20">
+                            <input type="number" class="browser-default" name="input-tts-queuemax" min="1" max="100">
                         </div>
                     </div>
                 </div>
@@ -175,6 +190,19 @@
                     <div class="col s3">
                         <div class="col s11 right-align">
                             <input type="number" class="browser-default" name="input-tts-queuestatus" disabled value=0>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-panel card-panel-settings settings-tts">
+                <div class="row">
+                    <div class="col s8">
+                        <!-- <i class="material-icons">favorite</i> -->
+                        <span class="card-panel-title">TTS Queued Test</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="col s11 right-align">
+                            <button name="button-tts-test">TEST</button>
                         </div>
                     </div>
                 </div>

@@ -11,6 +11,11 @@ const url = require('url');
 const say = require('say');
 const colors = require('colors');
 
+const process = require('process')
+const exec = require('executive');
+let isWin = process.platform === "win32";
+
+
 const Store = require('electron-store');
 const store = new Store();
 
@@ -18,10 +23,11 @@ var tts = {}
 tts.speaking  = false
 tts.queue     = []
 tts.voice     = store.get('config.rs.tts_voice') || 'Alex'
+tts.extra     = store.get('config.rs.tts_extra') || '-ven+m3'
 tts.speed     = store.get('config.rs.tts_speed') || 1
 tts.enabled   = store.get('config.rs.tts_enabled') || false
-tts.pausetime = store.get('config.rs.tts_pausetime') || 1
-tts.queuemax  = store.get('config.rs.tts_queuemax') || 20
+tts.pausetime = store.get('config.rs.tts_pausetime') || 0
+tts.queuemax  = store.get('config.rs.tts_queuemax') || 1
 
 tts.speak = function(phrase) {
     if (tts.queue.length <= tts.queuemax) {
@@ -31,9 +37,18 @@ tts.speak = function(phrase) {
         trySpeech(phrase);
     }
 }
-tts.now = function(phrase) {
-    say.speak(phrase, store.get('config.rs.tts_voice'), store.get('config.rs.tts_speed'));
-
+tts.now = function(phrase, callback) {
+  phrase = String(phrase.replace('"',' '))
+  if (store.get('config.rs.tts_voice') === 'espeak') {
+    let espeakCommand = isWin ? 'espeak.exe' : 'espeak'
+    exec.quiet(espeakCommand + ' -s ' + parseInt(store.get('config.rs.tts_speed')*100)+' '+store.get('config.rs.tts_extra')+' "'+phrase+'"', function(err,res){
+      if (callback) callback()
+    });
+  } else {
+    say.speak(phrase, store.get('config.rs.tts_voice'), store.get('config.rs.tts_speed'), function(err,res){
+      if (callback) callback()
+    });
+  }
 }
 tts.stop = function(callback) {
     say.stop(() => {
@@ -64,6 +79,18 @@ app.on('ready', function(){
         app.win.webContents.send('config.rs.tts_voice', to)
         tts.voice = store.get('config.rs.tts_voice')
         tts.now('voice changed')
+    })
+
+    // change extra
+    ipcMain.on('input:tts:extra', function(e, data) {
+        console.log('rs.tts_extra',data)
+        store.set('config.rs.tts_extra', data)
+    });
+    store.onDidChange('config.rs.tts_extra', function(to, from){
+        console.log('config.rs.tts_extra: ', to)
+        app.win.webContents.send('config.rs.tts_extra', to)
+        tts.extra = store.get('config.rs.tts_extra')
+        // tts.now('extra changed')
     })
 
     // select Speed
@@ -109,7 +136,13 @@ app.on('ready', function(){
         store.set('status.tts.messages', tts.queue.length)
         tts.now('queue cleared')
     });
-    
+
+    // trigger tts test
+    ipcMain.on('button:tts:test', function(e, data) {
+        console.log('rs.tts_test')
+        tts.speak('robotstreamer.com')
+    });
+
     // status queued messages
     store.onDidChange('status.tts.messages', function(to, from){
         app.win.webContents.send('status:tts:messages', to)
@@ -119,7 +152,7 @@ app.on('ready', function(){
 
 function checkEnabled(){
     if (tts.enabled) {
-        tts.speak('tts enabled')
+        tts.now('tts enabled')
     } else {
         tts.now('tts disabled')
     }
@@ -131,15 +164,20 @@ checkEnabled()
 function trySpeech() {
     if (tts.speaking === false && tts.queue.length >= 1 && tts.enabled) {
         tts.speaking = true;
-        var p = tts.queue[0]
+        var p = String(tts.queue[0])
         console.log('Speaking: '.magenta, p)
-        say.speak(p, store.get('config.rs.tts_voice'), store.get('config.rs.tts_speed'), function(err){
-            setTimeout(function(){
-                tts.queue.shift()
-                store.set('status.tts.messages', tts.queue.length)
-                tts.speaking = false;
-            },10 + tts.pausetime * 1000)
-        });
+
+        let callback = function(){
+          console.log('Speak: Finished Playing'.yellow, tts.queue.length, tts.pausetime)
+          setTimeout(function(){
+              console.log('Speak: Freeing Queue'.yellow, tts.queue.length, tts.pausetime)
+              console.log(10 + tts.pausetime * 1000)
+              tts.queue.shift()
+              store.set('status.tts.messages', tts.queue.length)
+              tts.speaking = false;
+          },10 + tts.pausetime * 1000)
+        }
+        tts.now(p, callback)
     }
 }
 setInterval(function() {
