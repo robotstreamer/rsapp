@@ -65,3 +65,10 @@ Scripts for building depending on target system:
 `npm run package-linux`  
 
 Will save into `/release-builds`
+
+##### TODO:
+- propper build script
+ - build all for all OS's
+ - remove unused ffmpeg-static binaries per OS
+ - zip
+ - rename zip with version number
