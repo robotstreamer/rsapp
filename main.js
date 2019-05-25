@@ -20,12 +20,6 @@ const store = new Store();
 // --- config
 var default_config = {
     "nms": {
-        "http": {
-            "allow_origin": "*",
-            "mediaroot": "./media",
-            "port": 8000,
-            "webroot": "./public"
-        },
         "rtmp": {
             "chunk_size": 10000, // 60000
             "gop_cache": false, // true
@@ -40,6 +34,7 @@ var default_config = {
         "robotID": "0",
         "streamKey": "",
         "tts_voice": "Alex",
+        "tts_extra": "-ven+m3",
         "tts_speed": "1",
         "tts_enabled": false,
         "tts_pausetime": "1",
@@ -70,6 +65,16 @@ if (!store.get('config')) {
     console.log('store initalized with config:', store.get('config'))
 } else {
     console.log('settings loaded: ', store.get('config'))
+    // check all rs configs and set to default if non existant
+    var rskeys = Object.keys(default_config.rs)
+    for (var i = 0; i < rskeys.length; i++ ){
+      let key = rskeys[i]
+      if (!store.get('config.rs.'+key) && store.get('config.rs.'+key) != "0") {
+        let set_to = default_config.rs[key]
+        console.log('setting default value for ' + key + ' to ' + set_to)
+        store.set('config.rs.'+key, set_to)
+      }
+    }
 }
 
 
