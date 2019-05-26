@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    store.get('toggle.tts') ? $('.settings-tts').show() : $('.settings-tts').hide()
+    $('.toggle-settings-tts').click(function(){
+        let toggle = store.get('toggle.tts')
+        if (toggle) {
+            $('.settings-tts').hide()
+        } else {
+            $('.settings-tts').show()
+        }
+        store.set('toggle.tts',!toggle)
+    })
+
     $('input[name=switch-tts]')[0].checked = store.get('config.rs.tts_enabled')
     $('input[name=switch-tts]').change(function(e) {
         console.log(e)
@@ -56,6 +67,12 @@ $(document).ready(function() {
         ipcRenderer.send('input:tts:pausetime', value)
     })
 
+    $('input[name=input-tts-timelimit]')[0].value = store.get('config.rs.tts_timelimit')/1000 || 0
+    $('input[name=input-tts-timelimit]').change(function(e) {
+        let value = Number(e.currentTarget.value*1000)
+        ipcRenderer.send('input:tts:timelimit', value)
+    })
+
     $('input[name=input-tts-queuemax]')[0].value = store.get('config.rs.tts_queuemax') || 20
     $('input[name=input-tts-queuemax]').change(function(e) {
         let value = Number(e.currentTarget.value)
@@ -73,16 +90,27 @@ $(document).ready(function() {
         $('input[name=input-tts-queuestatus]')[0].value = message || 0
     });
 
-    store.get('toggle.tts') ? $('.settings-tts').show() : $('.settings-tts').hide()
-    $('.toggle-settings-tts').click(function(){
-        let toggle = store.get('toggle.tts')
-        if (toggle) {
-            $('.settings-tts').hide()
+    $('input[name=switch-tts-hotkey-enabled]')[0].checked = store.get('config.rs.tts_hotkey_enabled')
+    $('input[name=switch-tts-hotkey-enabled]').change(function(e) {
+        console.log(e)
+        if (e.currentTarget.checked) {
+            ipcRenderer.send('switch:tts:hotkey-enabled', true)
         } else {
-            $('.settings-tts').show()
+            ipcRenderer.send('switch:tts:hotkey-enabled', false)
         }
-        store.set('toggle.tts',!toggle)
+        e.currentTarget.disabled = true
+        setTimeout(function(){
+            e.currentTarget.disabled = false
+        },1000)
+
     })
+    ipcRenderer.on('switch:tts:hotkey-enabled', function(event, message) {
+        store.set('config.rs.tts_hotkey_enabled', message)
+    });
+    store.onDidChange('switch-tts-hotkey-enabled', function(to, from) {
+        $('input[name=switch-tts-hotkey-enabled]').checked = to
+    })
+
 
 
 });
