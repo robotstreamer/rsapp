@@ -39,7 +39,7 @@ var default_config = {
         "tts_enabled": false,
         "tts_pausetime": "1",
         "tts_queuemax": "20",
-        "tts_timelimit": "0",
+        "tts_timelimit": "5000",
         "tts_hotkey_enabled": false,
         "screenWidth": "800",
         "screenHeight": "450",
