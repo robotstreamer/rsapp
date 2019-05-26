@@ -43,9 +43,9 @@ tts.now = function(phrase, callback) {
   phrase = String(phrase.replace('"',' '))
   let timelimit = store.get('config.rs.tts_timelimit')
   if (tts.voice === 'espeak') {
-    let espeakCommand = isWin ? 'resources\\app\\espeak' : 'espeak'
+    let espeakCommand = isWin ? 'resources/app/espeak' : 'espeak'
     let speakProcess = exec.quiet(espeakCommand + ' -s ' + parseInt(store.get('config.rs.tts_speed')*100)+' '+store.get('config.rs.tts_extra')+' "'+phrase+'"', function(err,res){
-      if (callback) callback()
+    if (callback) callback()
     });
     tts.pid = speakProcess.pid
     if (timelimit && tts.pid) {
