@@ -37,6 +37,7 @@ tts.speak = function(phrase) {
         tts.queue.push(phrase);
         store.set('status.tts.messages', tts.queue.length)
         console.log('queue,speaking:'.red, tts.queue, tts.speaking)
+        trySpeech()
     }
 }
 tts.now = function(phrase, callback) {
@@ -254,6 +255,7 @@ function trySpeech() {
               tts.queue.shift()
               store.set('status.tts.messages', tts.queue.length)
               tts.speaking = false;
+              trySpeech()
           },10 + tts.pausetime * 1000)
         }
         tts.now(p, callback)
