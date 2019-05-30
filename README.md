@@ -1,5 +1,7 @@
 # RS-App
-Electron app for desktop streaming on [robotstreamer.com](http://robotstreamer.com)
+Electron app for desktop streaming and TTS on [robotstreamer.com](http://robotstreamer.com)
+
+Dowload current build from [Releases](https://github.com/robotstreamer/rsapp/releases)
 
 ## How to use
 #### You will need
