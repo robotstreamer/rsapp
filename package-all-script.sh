@@ -49,6 +49,7 @@ echo -e ${CURRENT_TARGET}:${C2}Compressing package...${CE}
 cd ./release-builds
 mv rsapp-win32-ia32 $TARGET_WIN
 mv $TARGET_WIN/rsapp.exe $TARGET_WIN/$TARGET_WIN.exe
+mv $TARGET_WIN/resources/app/espeak.exe $TARGET_WIN/espeak.exe
 tar -czf $TARGET_WIN.tar.gz --overwrite $TARGET_WIN
 cd ..
 
