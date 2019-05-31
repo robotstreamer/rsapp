@@ -46,11 +46,11 @@ var default_config = {
         "videoBitrate": "700k",
         "audioBitrate": "128k",
         "api_host": "api.robotstreamer.com",
-        "api_port": "8080",
-        "api_protocol": "http",
+        "api_port": "443",
+        "api_protocol": "https",
         "chat_host": "robotstreamer.com",
         "chat_port": "8765",
-        "chat_protocol": "ws",
+        "chat_protocol": "wss",
         "video_host": "",
         "video_port": "",
         "audio_host": "",
@@ -59,6 +59,11 @@ var default_config = {
 }
 // -- reset config
 // store.set('config',null)
+
+// -- make sure its ssl
+store.set('config.rs.api_port',null)
+store.set('config.rs.api_protocol',null)
+store.set('config.rs.chat_protocol',null)
 
 // --- init config
 if (!store.get('config')) {
