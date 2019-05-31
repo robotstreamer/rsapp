@@ -137,3 +137,16 @@ button:focus {
 .col {
     padding: 0px !important;
 }
+label.custom-file-upload {
+  display: inline;
+  background: gray;
+  padding: 6px 8px;
+  margin: 0px;
+  margin-right: 0px;
+  position: relative !important;
+  height: 12px;
+  font-size: 10px;
+}
+.settings-sounds-source-folder-path {
+  color: #444;
+}
