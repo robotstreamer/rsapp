@@ -46,8 +46,8 @@ app.on('ready', function(){
 
 
 function getChatEndpoint(api_protocol, api_host, api_port, logs){
-    // http://robotstreamer.com:6001/v1/get_endpoint/jsmpeg_video_capture/211
-    var url = api_protocol + '://' + api_host + ':' + api_port + '/v1/get_endpoint/rschat/100'
+  // https://api.robotstreamer.com/v1/get_random_endpoint/rschatssl/100
+  var url = api_protocol + '://' + api_host + ':' + api_port + '/v1/get_random_endpoint/rschatssl/100'
 	if (logs) console.log("chat endpoint url: ", url)
 	var options = {
 		url: url,
@@ -72,9 +72,9 @@ function getChatEndpoint(api_protocol, api_host, api_port, logs){
 
 
 function openChatHostWebsocket() {
-    var host = store.get('config.rs.chat_host') || "robotstreamer.com"
-    var port = store.get('config.rs.chat_port') || 8765
-    var protocol = store.get('config.rs.chat_protocol') || "http"
+    var host = store.get('config.rs.chat_host')
+    var port = store.get('config.rs.chat_port')
+    var protocol = store.get('config.rs.chat_protocol')
 	console.log('<== ws-chat opening.. '.yellow, host, port);
     if(wsChat) {
         wsChat.close()
