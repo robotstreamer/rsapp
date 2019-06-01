@@ -1,9 +1,9 @@
 #!/bin/bash
 
-C1="\e[31m"
-C2="\e[33m"
-C3="\e[32m"
-CE="\e[0m"
+C1="\033[0;31m"
+C2="\033[1;33m"
+C3="\033[0;32m"
+CE="\033[0m"
 
 VERSION="v$1"
 TARGET_MAC=rsapp-mac-$VERSION
@@ -28,9 +28,21 @@ rm -rf ./release-builds/rsapp-darwin-x64/rsapp.app/Contents/Resources/app/node_m
 
 echo -e ${CURRENT_TARGET}:${C2}Compressing package...${CE}
 cd ./release-builds
+if [ -e "$TARGET_MAC.tar.gz" ]; then
+    rm "$TARGET_MAC.tar.gz"
+fi
+if [ -d "$TARGET_MAC" ]; then
+    rm -rf "./$TARGET_MAC"
+fi
+ls
+echo moving
 mv rsapp-darwin-x64 $TARGET_MAC
+ls
+echo renaming
 mv $TARGET_MAC/rsapp.app $TARGET_MAC/$TARGET_MAC.app
-tar -czf $TARGET_MAC.tar.gz --overwrite $TARGET_MAC
+ls
+echo compressing
+tar -czf $TARGET_MAC.tar.gz $TARGET_MAC
 cd ..
 
 echo -e ${CURRENT_TARGET}:${C3}Created file:${CE} ${TARGET_MAC}.tar.gz
@@ -47,10 +59,17 @@ rm -rf ./release-builds/rsapp-win32-ia32/resources/app/node_modules/ffmpeg-stati
 
 echo -e ${CURRENT_TARGET}:${C2}Compressing package...${CE}
 cd ./release-builds
+if [ -e "$TARGET_WIN.tar.gz" ]; then
+     rm "$TARGET_WIN.tar.gz"
+fi
+if [ -d "$TARGET_WIN" ]; then
+    rm -rf "./$TARGET_WIN"
+fi
 mv rsapp-win32-ia32 $TARGET_WIN
 mv $TARGET_WIN/rsapp.exe $TARGET_WIN/$TARGET_WIN.exe
 mv $TARGET_WIN/resources/app/espeak.exe $TARGET_WIN/espeak.exe
-tar -czf $TARGET_WIN.tar.gz --overwrite $TARGET_WIN
+rm $TARGET_WIN.tar.gz
+tar -czf $TARGET_WIN.tar.gz $TARGET_WIN
 cd ..
 
 echo -e ${CURRENT_TARGET}:${C3}Created file:${CE} ${TARGET_WIN}.tar.gz
@@ -67,11 +86,18 @@ rm -rf ./release-builds/rsapp-linux-x64/resources/app/node_modules/ffmpeg-static
 
 echo -e ${CURRENT_TARGET}:${C2}Compressing package...${CE}
 cd ./release-builds
+if [ -e "$TARGET_LINUX.tar.gz" ]; then
+     rm "$TARGET_LINUX.tar.gz"
+fi
+if [ -d "$TARGET_LINUX" ]; then
+    rm -rf "./$TARGET_LINUX"
+fi
+
 mv rsapp-linux-x64 $TARGET_LINUX
 mv $TARGET_LINUX/rsapp $TARGET_LINUX/$TARGET_LINUX
-tar -czf $TARGET_LINUX.tar.gz --overwrite $TARGET_LINUX
+rm $TARGET_LINUX.tar.gz
+tar -czf $TARGET_LINUX.tar.gz $TARGET_LINUX
 cd ..
 
 echo -e ${CURRENT_TARGET}:${C3}Created file:${CE} ${TARGET_WIN}.tar.gz
 echo '---'
-
