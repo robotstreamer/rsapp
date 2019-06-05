@@ -252,6 +252,12 @@
 
 
 
+
+
+
+
+
+
         <!--
         <div class="row">
             <div class="col s12">
@@ -546,6 +552,63 @@
         </div>
     </div>
 
+    <div class="row plugin plugin-lush">
+        <div class="col s12">
+            <div class="card-panel bg-pink">
+                <div class="row">
+                    <div class="col s6">
+                        <span class="card-panel-title card-panel-title-with-settings toggle-settings-lush">Lush</span>
+                    </div>
+                    <div class="col s6">
+                        <div class="switch right-align">
+                            <label>
+                                <input type="checkbox" name="switch-lush">
+                                <span class="lever"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-panel card-panel-settings settings-lush">
+                <div class="row">
+                    <div class="col s8">
+                        <!-- <i class="material-icons">favorite</i> -->
+                        <span class="card-panel-title">Volume</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="input-field col s11 right-align">
+                            <select class="browser-default" name="select-lush-volume">
+                                <option value="" disabled selected>Select Volume</option>
+                                <option value="0.25">0.25</option>
+                                <option value="0.5">0.50</option>
+                                <option value="0.75">0.75</option>
+                                <option value="1">1.00</option>
+                                <option value="1.25">1.25</option>
+                                <option value="1.5">1.50</option>
+                                <option value="1.75">1.75</option>
+                                <option value="2">2.00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-panel card-panel-settings settings-lush">
+                <div class="row">
+                    <div class="col s8">
+                        <!-- <i class="material-icons">favorite</i> -->
+                        <span class="card-panel-title">Test Speed 10</span>
+                    </div>
+                    <div class="col s4">
+                        <div class="col s11 right-align">
+                            <button name="button-lush-test">TEST</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
 
     <!--
@@ -606,6 +669,7 @@ STREAMKEY: cam
     <script type="text/javascript" src="assets/js/rs-alive.js"></script>
     <script type="text/javascript" src="assets/js/rs-tts.js"></script>
     <script type="text/javascript" src="assets/js/rs-nms.js"></script>
+    <script type="text/javascript" src="assets/js/rs-lush.js"></script>
     <script type="text/javascript" src="assets/js/rs-usersettings.js"></script>
     <script type="text/javascript" src="assets/js/rs-devsettings.js"></script>
 </body>
