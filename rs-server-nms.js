@@ -11,9 +11,7 @@ const store = new Store();
 
 const rsStream = require('./rs-server-stream')
 
-var config = store.get('config.nms')
-
-var nms = new NodeMediaServer(config)
+var nms = new NodeMediaServer(store.get('config.nms'))
 
 rsStream.setNMS(nms)
 
@@ -25,14 +23,14 @@ app.on('ready', function(){
     store.onDidChange('config.nms.enabled', function(to, from){
         console.log('config.nms.enabled: ', to)
         app.win.webContents.send('config.nms.enabled', to)
-        config.enabled = to
+        store.set('config.nms.enabled', to)
         restart()
     })
 })
 
 function checkEnabled(){
-    console.log('nms:checking enabled', config)
-    if (config && config.enabled){
+    console.log('nms:checking enabled', store.get('config.nms.enbled'))
+    if (store.get('config.nms') && store.get('config.nms.enabled')){
         nms.run();
     } else {
         nms.stop()
@@ -49,9 +47,6 @@ nms.on('donePublish', (id, StreamPath, args) => {
 });
 
 function restart(){
-    // if (nms) nms.stop()
-    // nms = new NodeMediaServer(store.get('config.nms'))
-    // rsStream.setNMS(nms)
     checkEnabled()
 }
 
