@@ -59,8 +59,8 @@ rm -rf ./release-builds/rsapp-win32-ia32/resources/app/node_modules/ffmpeg-stati
 
 echo -e ${CURRENT_TARGET}:${C2}Compressing package...${CE}
 cd ./release-builds
-if [ -e "$TARGET_WIN.tar.gz" ]; then
-     rm "$TARGET_WIN.tar.gz"
+if [ -e "$TARGET_WIN.zip" ]; then
+     rm "$TARGET_WIN.zip"
 fi
 if [ -d "$TARGET_WIN" ]; then
     rm -rf "./$TARGET_WIN"
@@ -68,8 +68,7 @@ fi
 mv rsapp-win32-ia32 $TARGET_WIN
 mv $TARGET_WIN/rsapp.exe $TARGET_WIN/$TARGET_WIN.exe
 mv $TARGET_WIN/resources/app/espeak.exe $TARGET_WIN/espeak.exe
-rm $TARGET_WIN.tar.gz
-tar -czf $TARGET_WIN.tar.gz $TARGET_WIN
+zip -r $TARGET_WIN.zip $TARGET_WIN
 cd ..
 
 echo -e ${CURRENT_TARGET}:${C3}Created file:${CE} ${TARGET_WIN}.tar.gz
