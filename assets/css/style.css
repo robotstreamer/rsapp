@@ -3,6 +3,10 @@ html, body {
     background: #232323;
 }
 
+.plugin {
+  display: none;
+}
+
 .brand-logo {
     font-size: 21px !important;
 }
@@ -149,4 +153,8 @@ label.custom-file-upload {
 }
 .settings-sounds-source-folder-path {
   color: #444;
+}
+
+.bg-pink {
+  background-color: rgb(255,110,150);
 }
