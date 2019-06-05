@@ -10,6 +10,9 @@ TARGET_MAC=rsapp-mac-$VERSION
 TARGET_WIN=rsapp-win-$VERSION
 TARGET_LINUX=rsapp-linux-$VERSION
 
+cd ..
+pwd
+
 echo -e ${C1}Building version:${CE} $VERSION
 echo '---'
 
