@@ -267,17 +267,17 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 // Alive Message
-const rsAlive = require('./rs-server-alive')
-const rsTTS = require('./rs-server-tts')
-const rsLush = require('./rs-server-lush')
-const rsChat = require('./rs-server-chat')
+const rsAlive = require('./lib/rs-server-alive')
+const rsTTS = require('./lib/rs-server-tts')
+const rsLush = require('./lib/rs-server-lush')
+const rsChat = require('./lib/rs-server-chat')
 rsChat.setTTS(rsTTS.tts)
 
 ipcMain.on('chat:restart', function(e, data) {
 	console.log('Restarting Chat...'.yellow)
 	// rsChat.restart()
 });
-const rsNMS = require('./rs-server-nms')
+const rsNMS = require('./lib/rs-server-nms')
 
 
 setTimeout(function() {
