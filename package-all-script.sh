@@ -10,6 +10,9 @@ TARGET_MAC=rsapp-mac-$VERSION
 TARGET_WIN=rsapp-win-$VERSION
 TARGET_LINUX=rsapp-linux-$VERSION
 
+cd ..
+pwd
+
 echo -e ${C1}Building version:${CE} $VERSION
 echo '---'
 
@@ -67,7 +70,7 @@ if [ -d "$TARGET_WIN" ]; then
 fi
 mv rsapp-win32-ia32 $TARGET_WIN
 mv $TARGET_WIN/rsapp.exe $TARGET_WIN/$TARGET_WIN.exe
-mv $TARGET_WIN/resources/app/espeak.exe $TARGET_WIN/espeak.exe
+mv $TARGET_WIN/resources/app/bin/espeak.exe $TARGET_WIN/espeak.exe
 zip -r $TARGET_WIN.zip $TARGET_WIN
 cd ..
 
