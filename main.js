@@ -1,5 +1,5 @@
-// process.env.NODE_ENV = 'production';
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = 'development';
 
 const url = require('url');
 const path = require('path');
@@ -11,8 +11,7 @@ const {
 	ipcMain
 } = electron;
 
-require('electron-context-menu')();
-
+const contextMenu = require('electron-context-menu');
 const Store = require('electron-store');
 const store = new Store();
 
@@ -68,45 +67,49 @@ var default_config = {
 // -- reset config
 // store.set('config',null)
 
-// -- make sure its ssl
-store.set('config.rs.api_port', null)
-store.set('config.rs.api_protocol', null)
-store.set('config.rs.chat_protocol', null)
-store.set('config.rs.control_protocol', null)
-
 // --- init config
 if (!store.get('config')) {
 	console.log('loading default settings')
 	store.set('config', default_config)
 	console.log('store initalized with config:', store.get('config'))
-} else {
-	console.log('settings loaded: ', store.get('config'))
-	// check all rs configs and set to default if non existant
-	var rskeys = Object.keys(default_config.rs)
-	for (var i = 0; i < rskeys.length; i++) {
-		let key = rskeys[i]
-		if (!store.get('config.rs.' + key) && store.get('config.rs.' + key) != "0") {
-			let set_to = default_config.rs[key]
-			console.log('setting default value for ' + key + ' to ' + set_to)
-			store.set('config.rs.' + key, set_to)
-		}
-	}
-  // check plugins
-  if (!store.get('config.plugins')) {
-    store.set('config.plugins', {})
-  }
-  // check all plugins and set to default if non existant
-  var keys = Object.keys(default_config.plugins)
-  for (var i = 0; i < keys.length; i++) {
-    let key = keys[i]
-    if (!store.get('config.plugins.' + key) && store.get('config.plugins.' + key) != "0") {
-      let set_to = default_config.plugins[key]
-      console.log('setting default value for ' + key + ' to ' + set_to)
-      store.set('config.plugins.' + key, set_to)
-    }
-  }
-
 }
+
+console.log('settings loaded: ', store.get('config'))
+
+// -- make sure its ssl and reset ports+protocols
+store.set('config.rs.api_port', null)
+store.set('config.rs.api_protocol', null)
+store.set('config.rs.chat_protocol', null)
+store.set('config.rs.control_protocol', null)
+
+// check reset nms settings
+store.set('config.nms', default_config.nms)
+
+// check all rs configs and set to default if non existant
+var rskeys = Object.keys(default_config.rs)
+for (var i = 0; i < rskeys.length; i++) {
+	let key = rskeys[i]
+	if (!store.get('config.rs.' + key) && store.get('config.rs.' + key) != "0") {
+		let set_to = default_config.rs[key]
+		console.log('setting default value for ' + key + ' to ' + set_to)
+		store.set('config.rs.' + key, set_to)
+	}
+}
+// check plugins
+if (!store.get('config.plugins')) {
+  store.set('config.plugins', {})
+}
+// check all plugins and set to default if non existant
+var keys = Object.keys(default_config.plugins)
+for (var i = 0; i < keys.length; i++) {
+  let key = keys[i]
+  if (!store.get('config.plugins.' + key) && store.get('config.plugins.' + key) != "0") {
+    let set_to = default_config.plugins[key]
+    console.log('setting default value for ' + key + ' to ' + set_to)
+    store.set('config.plugins.' + key, set_to)
+  }
+}
+
 
 
 // ---- status
