@@ -1,7 +1,7 @@
 {
   "name": "rsapp",
-  "version": "1.0.6",
-  "description": "",
+  "version": "1.0.7",
+  "description": "desktop app to help streaming on robotstreamer.com",
   "main": "main.js",
   "dependencies": {
     "child_process": "^1.0.2",
