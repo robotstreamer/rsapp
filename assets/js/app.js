@@ -25,7 +25,7 @@ function removeItem(e) {
 }
 
 function saveConfig() {
-    console.log('saveing config...', config)
+    console.log('Saving config...', config)
     var inputs = document.querySelectorAll('input')
     inputs.forEach(function(input) {
         config.rs[input.name] = input.value

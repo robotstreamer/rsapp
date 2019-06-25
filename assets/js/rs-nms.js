@@ -27,6 +27,15 @@ $(document).ready(function(){
         store.set('toggle.nms', !toggle)
     })
 
+    $('select[name=select-videotype]')[0].value = store.get('config.rs.videotype') || "jsmpeg"
+    $('select[name=select-videotype]').change(function(e) {
+        console.log(e.currentTarget.value)
+        let value = e.currentTarget.value
+        if (value) {
+            store.set('config.rs.videotype', value)
+        }
+    })
+
     $('input[name=input-video-bitrate]')[0].value = store.get('config.rs.videoBitrate')
     $('input[name=input-video-bitrate]').change(function(e) {
         let value = e.currentTarget.value
