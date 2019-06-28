@@ -56,6 +56,8 @@ var default_config = {
 		"video_port": "",
 		"audio_host": "",
 		"audio_port": "",
+		"SFU_host": "",
+		"SFU_port": "",		
 		"control_host": "",
 		"control_port": "",
 		"control_protocol": "ws"
