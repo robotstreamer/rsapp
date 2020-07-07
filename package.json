@@ -6,7 +6,7 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "colors": "^1.3.3",
-    "electron": "^3.1.8",
+    "electron": "^9.1.0",
     "electron-context-menu": "^0.10.1",
     "electron-store": "^2.0.0",
     "executive": "^1.6.3",
